@@ -3575,7 +3575,9 @@ function getUidLookup(e) {
 
     id: hit.id || '',
 
-    identity: hit.identity || ''
+    identity: hit.identity || '',
+
+    display: getPublicScanDisplay(hit)
 
   };
 
@@ -3599,7 +3601,7 @@ function getPublicScanDisplay(hit) {
       const until = new Date(player.ghostUntil);
       if (!isNaN(until.getTime()) && until.getTime() > Date.now()) publicStatus = 'GHOST';
     }
-    return { label: 'PLAYER ID', verified: player.status === 'ACTIVE', status: publicStatus };
+    return { label: 'PLAYER ID', verified: player.status === 'ACTIVE', role: player.role || 'UNDEFINED', status: publicStatus };
   }
   if (hit.type === 'NODE') {
     const sheet = getNodeRegisterSheet(), rows = sheet.getRange(2, 1, 15, 3).getValues();
